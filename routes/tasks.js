@@ -6,11 +6,11 @@ router.get('/', async (req, res, next) => {
 
     const task = {
         id: 1,
-        done: false,
+        done: true,
         title: "测试任务",
         description: "描述文案",
         processor: {
-            id: 10,
+            id: 2,
             avator: "https://avatars0.githubusercontent.com/u/22772199?s=460&v=4",
             name: 'Jenkins用户'
         },
