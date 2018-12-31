@@ -6,7 +6,7 @@ router.get('/', async (req, res, next) => {
 
     const task = {
         id: 1,
-        done: true,
+        done: false,
         title: "测试任务",
         description: "描述文案",
         processor: {
