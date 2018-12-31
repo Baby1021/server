@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
         processor: {
             id:10,
             avator:"https://avatars0.githubusercontent.com/u/22772199?s=460&v=4",
-            name:'测试用户'
+            name:'Jenkins用户'
         },
         createTime: Date.now()
     }
