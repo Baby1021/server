@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
         description: "描述文案",
         processor: {
             id: 2,
-            avatar: "https://avatars0.githubusercontent.com/u/22772199?s=460&v=4",
+            avatar: "http://39.108.227.137:3000/images/avatar.jpeg",
             name: 'Jenkins用户'
         },
         createTime: Date.now()
