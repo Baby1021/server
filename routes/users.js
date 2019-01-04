@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const {
+    queryAllUser
+} = require('../db/UserDao')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/list', async (req, res, next) => {
+    const users = await queryAllUser();
+    res.json(users)
+})
 
 module.exports = router;
