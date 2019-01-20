@@ -17,31 +17,31 @@ let love = {
             })
     },
 
-    addTask: async function(task) {
+    addLove: async function(love) {
 
-        let sql = 'insert into task set ?';
+        let sql = 'insert into love set ?';
 
-        return pool.query(toSql(sql, task))
+        return pool.query(toSql(sql, love))
             .then(([result]) => {
                 return result.insertId;
             })
     },
 
-    delTask: async function(taskId) {
-        let sql = 'delete from task where task.id=?';
+    delLove: async function(loveId) {
+        let sql = 'delete from love where love.id=?';
 
-        return pool.query(toSql(sql, taskId))
+        return pool.query(toSql(sql, loveId))
             .then(([result]) => {
                 return result.affectedRows;
             })
 
     },
 
-    updateTask: async function(task) {
+    updateLove: async function(love) {
 
-        let sql = 'update task set ? where task.id = ?'
+        let sql = 'update love set ? where love.id = ?'
 
-        return pool.query(toSql(sql, [task, task.id]))
+        return pool.query(toSql(sql, [love, love.id]))
             .then(([result]) => {
                 return result.affectedRows;
             })
