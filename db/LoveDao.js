@@ -5,7 +5,8 @@ const {toSql} = require('./dbUtils')
 let love = {
     queryLove: async function(userId) {
         const options = {
-            sql: "SELECT * FROM user right join love on user.userId = love.userId where user.userId = ?",
+            // sql: "SELECT * FROM user right join love on user.userId = love.userId where user.userId = ?",
+            sql: "SELECT * FROM user right join love on user.userId = love.userId",
             nestTables: true
         };
         return pool.query(options, [userId])
