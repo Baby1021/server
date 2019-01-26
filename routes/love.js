@@ -1,15 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const {imageMiddleware} = require('../util/multer')
-const {
-    addLove,
-    updateLove,
-    queryLove,
-    delLove
-} = require('../db/LoveDao');
-const {
-    json
-} = require('../util/ResponseUtil');
+const {addLove, updateLove, queryLove, delLove} = require('../db/LoveDao');
+const {json} = require('../util/ResponseUtil');
+const {getImages} = require('../util/BabyUtils');
 
 router.get('/', async (req, res, next) => {
     const love = await queryLove(req.query.userId)
@@ -30,16 +24,9 @@ router.post('/image', imageMiddleware.array('images', 9), async (req, res) => {
 
         const content = req.body.content
         const userId = req.body.userId;
-
-        const images = []
-
-        req.files.forEach(file => {
-            images.push("http://39.108.227.137:3000/images/loves/" + file.filename)
-        })
-
         const result = await addLove({
             content, userId,
-            "images": JSON.stringify(images)
+            "images": getImages(req.files)
         })
 
         json(res, {result})
