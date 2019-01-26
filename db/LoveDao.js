@@ -4,18 +4,18 @@ const {toSql} = require('./dbUtils')
 
 let love = {
     queryLove: async function(userId) {
-        const options = {
-            // sql: "SELECT * FROM user right join love on user.userId = love.userId where user.userId = ?",
-            sql: "SELECT * FROM user right join love on user.userId = love.userId",
+        const sql = toSql("SELECT * FROM user right join love on user.userId = love.userId where love.userId = ? or love.userId = (select user.lover from user where user.userId = ? ) order by createTime desc ",
+            [userId, userId])
+
+        return pool.query({
+            sql,
             nestTables: true
-        };
-        return pool.query(options, [userId])
-            .then(([rows]) => {
-                return rows.map(({love, user}) => {
-                    delete user.password
-                    return {...love, user}
-                })
+        }).then(([rows]) => {
+            return rows.map(({love, user}) => {
+                delete user.password
+                return {...love, user}
             })
+        })
     },
 
     addLove: async function(love) {
