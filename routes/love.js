@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {imageMiddleware} = require('../util/multer')
 const {
     addLove,
     updateLove,
@@ -23,6 +24,29 @@ router.post('/', async (req, res, next) => {
         json(res, {error: e.message}, -1, "添加失败")
     }
 });
+
+router.post('/image', imageMiddleware.array('images', 9), async (req, res) => {
+    try {
+
+        const content = req.body.content
+        const userId = req.body.userId;
+
+        const images = []
+
+        req.files.forEach(file => {
+            images.push("http://39.108.227.137:3000/images/loves/" + file.filename)
+        })
+
+        const result = await addLove({
+            content, userId,
+            "images": JSON.stringify(images)
+        })
+
+        json(res, {result})
+    } catch (e) {
+        json(res, {error: e.message}, -1, "添加失败")
+    }
+})
 
 router.put('/', async (req, res, next) => {
     try {
