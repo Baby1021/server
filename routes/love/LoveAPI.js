@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {imageMiddleware} = require('../util/multer')
-const {addLove, updateLove, queryLove, delLove, queryLoveWithRemind} = require('../db/LoveDao');
-const {json} = require('../util/ResponseUtil');
-const {getImages} = require('../util/BabyUtils');
+const {imageMiddleware} = require('../../util/multer')
+const {addLove, updateLove, queryLove, delLove, queryLoveWithRemind} = require('../../db/LoveDao');
+const {json} = require('../../util/ResponseUtil');
+const {getImages} = require('../../util/BabyUtils');
 
 /**
  * 查询用户Love
@@ -11,6 +11,7 @@ const {getImages} = require('../util/BabyUtils');
  * @param userId 用户Id
  *
  * @version v0.0.1 新增接口
+ * @version v0.0.3 返回评论数据
  */
 router.get('/', async (req, res, next) => {
     const love = await queryLove(req.query.userId)
