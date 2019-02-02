@@ -3,8 +3,30 @@ const {toSql} = require('./dbUtils')
 
 
 let love = {
+    // todo 整合queryLove和queryLoveWithRemind方法
     queryLove: async function(userId) {
         const sql = toSql("SELECT * FROM user right join love on user.userId = love.userId where love.userId = ? or love.userId = (select user.lover from user where user.userId = ? ) order by createTime desc ",
+            [userId, userId])
+
+        let loves = await pool.query({
+            sql,
+            nestTables: true
+        }).then(([rows]) => {
+            return rows.map(({love, user}) => {
+                delete user.password
+                return {...love, user}
+            })
+        });
+
+        for (let love of loves) {
+            const sql = toSql("select * from love_comment where love_comment.loveId = ? order by createTime", love.id)
+            love.comments = await pool.query(sql).then(([rows]) => rows)
+        }
+        return loves
+    },
+
+    queryLoveWithRemind: async function(userId) {
+        const sql = toSql("SELECT * FROM user right join love on user.userId = love.userId where (love.userId = ? or love.userId = (select user.lover from user where user.userId = ? )) and love.remind=true order by createTime desc ",
             [userId, userId])
 
         return pool.query({
@@ -43,6 +65,25 @@ let love = {
         let sql = 'update love set ? where love.id = ?'
 
         return pool.query(toSql(sql, [love, love.id]))
+            .then(([result]) => {
+                return result.affectedRows;
+            })
+    }
+    ,
+
+    addLoveComment: async function(comment) {
+        let sql = 'insert into love_comment set ?';
+
+        return pool.query(toSql(sql, comment))
+            .then(([result]) => {
+                return result.insertId;
+            })
+    },
+
+    deleteLoveComment: async function(commentId) {
+        let sql = 'delete from love_comment where love_comment.id=?';
+
+        return pool.query(toSql(sql, commentId))
             .then(([result]) => {
                 return result.affectedRows;
             })
