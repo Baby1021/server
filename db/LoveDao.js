@@ -18,6 +18,21 @@ let love = {
         })
     },
 
+    queryLoveWithRemind: async function(userId) {
+        const sql = toSql("SELECT * FROM user right join love on user.userId = love.userId where (love.userId = ? or love.userId = (select user.lover from user where user.userId = ? )) and love.remind=true order by createTime desc ",
+            [userId, userId])
+
+        return pool.query({
+            sql,
+            nestTables: true
+        }).then(([rows]) => {
+            return rows.map(({love, user}) => {
+                delete user.password
+                return {...love, user}
+            })
+        })
+    },
+
     addLove: async function(love) {
 
         let sql = 'insert into love set ?';
