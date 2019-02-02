@@ -35,6 +35,8 @@ router.get('/remind', async (req, res, next) => {
  *
  * @version v0.0.1 新增接口
  * @version v0.0.3 新增remind字段 todo 这个接口应该和image接口合并
+ *
+ * @deprecated
  */
 router.post('/', async (req, res, next) => {
     try {
@@ -57,9 +59,10 @@ router.post('/image', imageMiddleware.array('images', 9), async (req, res) => {
 
         const content = req.body.content
         const userId = req.body.userId;
+        const remind = req.body.remind;
         const result = await addLove({
             content, userId,
-            remind: true,
+            remind,
             "images": getImages(req.files)
         })
 
