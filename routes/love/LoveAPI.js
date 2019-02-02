@@ -39,7 +39,6 @@ router.get('/remind', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const love = req.body.love;
-        love.remind = true
         const loveId = await addLove(love)
         json(res, {loveId})
     } catch (e) {
