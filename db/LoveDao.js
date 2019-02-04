@@ -19,8 +19,17 @@ let love = {
         });
 
         for (let love of loves) {
-            const sql = toSql("select * from love_comment where love_comment.loveId = ? order by createTime", love.id)
-            love.comments = await pool.query(sql).then(([rows]) => rows)
+            // const sql = toSql("select * from love_comment where love_comment.loveId = ? order by createTime", love.id)
+            const sql = toSql("select * from user right join love_comment as comment  on user.userId = comment.userId where comment.loveId = ? order by createTime", love.id)
+            love.comments = await pool.query({
+                sql,
+                nestTables: true
+            }).then(([rows]) => {
+                return rows.map(({comment, user}) => {
+                    delete user.password
+                    return {...comment, user}
+                })
+            });
         }
         return loves
     },
