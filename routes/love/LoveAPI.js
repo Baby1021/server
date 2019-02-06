@@ -62,7 +62,7 @@ router.post('/image', imageMiddleware.array('images', 9), async (req, res) => {
         const remind = req.body.remind;
         const result = await addLove({
             content, userId,
-            remind: remind === 'true' ? 0 : 1,
+            remind: remind === 'true' ? 1 : 0,
             "images": getImages(req.files)
         })
 
@@ -112,7 +112,7 @@ router.delete('/', async (req, res, next) => {
  */
 router.post('/remind', async (req, res, next) => {
     const loveId = req.body.loveId;
-    const remind = req.body.remind;
+    const remind = req.body.remind === 'true' ? 0 : 1;
 
     try {
         const result = await updateLove({
