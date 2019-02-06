@@ -62,7 +62,7 @@ router.post('/image', imageMiddleware.array('images', 9), async (req, res) => {
         const remind = req.body.remind;
         const result = await addLove({
             content, userId,
-            remind: remind === 'true' ? 1 : 0,
+            remind: remind === 'true' ? 0 : 1,
             "images": getImages(req.files)
         })
 
