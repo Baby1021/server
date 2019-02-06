@@ -35,8 +35,8 @@ let love = {
     },
 
     queryLoveWithRemind: async function(userId) {
-        const sql = toSql("SELECT * FROM user right join love on user.userId = love.userId where (love.userId = ? or love.userId = (select user.lover from user where user.userId = ? )) and love.remind=true order by createTime desc ",
-            [userId, userId])
+        const sql = toSql("SELECT * FROM user right join love on user.userId = love.userId where  love.userId = (select user.lover from user where user.userId = ? ) and love.remind=true order by createTime desc ",
+            [userId])
 
         return pool.query({
             sql,
