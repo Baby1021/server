@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {imageMiddleware} = require('../../util/multer')
-const {addLove, updateLove, queryLove, delLove, queryLoveWithRemind} = require('../../db/LoveDao');
+const {updateLove, queryLove, delLove, queryLoveWithRemind} = require('../../db/LoveDao');
+const {addLove} = require('../../service/LoveSerivce');
 const {json} = require('../../util/ResponseUtil');
 const {getImages} = require('../../util/BabyUtils');
 
@@ -28,24 +29,6 @@ router.get('/', async (req, res, next) => {
 router.get('/remind', async (req, res, next) => {
     const love = await queryLoveWithRemind(req.query.userId)
     res.json(love)
-});
-
-/**
- * 添加Love(文字)
- *
- * @version v0.0.1 新增接口
- * @version v0.0.3 新增remind字段 todo 这个接口应该和image接口合并
- *
- * @deprecated
- */
-router.post('/', async (req, res, next) => {
-    try {
-        const love = req.body.love;
-        const loveId = await addLove(love)
-        json(res, {loveId})
-    } catch (e) {
-        json(res, {error: e.message}, -1, "添加失败")
-    }
 });
 
 /**

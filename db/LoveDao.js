@@ -77,8 +77,7 @@ let love = {
             .then(([result]) => {
                 return result.affectedRows;
             })
-    }
-    ,
+    },
 
     addLoveComment: async function(comment) {
         let sql = 'insert into love_comment set ?';
