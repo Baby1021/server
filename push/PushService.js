@@ -25,7 +25,7 @@ module.exports = {
         const params = {
             'appkey': APP_KEY,
             "mipush": true,
-            "mi_activity": "com.laiyuanwen.android.baby.WelcomeActivity", // 这里应该有一个配置文件
+            "mi_activity": "com.laiyuanwen.android.baby.push.PushActivity", // 这里应该有一个配置文件
             'timestamp': new Date().getTime(),
             'device_tokens': devicesToken,
             'type': 'unicast',
