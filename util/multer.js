@@ -4,7 +4,7 @@ var crypto = require('crypto');
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
         // todo 配置文件
-        cb(null, '~/static_server/public/images/')
+        cb(null, '../static_server/public/images/')
     },
     filename: function(req, file, cb) {
         const filename = file.originalname;
