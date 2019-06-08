@@ -11,6 +11,7 @@ const appRouter = require('./routes/app');
 const loveRouter = require('./routes/love/LoveAPI');
 const loveCommentAPI = require('./routes/love/LoveCommentAPI');
 const surpriseRouter = require('./routes/surprise');
+const anniversaryAPI = require('./routes/AnniversaryAPI');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/v1/app', appRouter);
 app.use('/api/v1/love', loveRouter);
 app.use('/api/v1/lovecomment', loveCommentAPI);
 app.use('/api/v1/surprise', surpriseRouter);
+app.use('/api/v1/anniversary', anniversaryAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

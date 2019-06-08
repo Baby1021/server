@@ -12,7 +12,7 @@ const pool = mysql.createPool({
         if (field.type === 'TINY' && field.length === 4) {
             return (field.string() === '1'); // tinyint转boolean
         }
-        if (field.type === "DATETIME") {
+        if (field.type === "DATETIME" || field.type === 'DATE') {
             const date = field.string();
             let d = new Date(date);
             return d.getTime()
