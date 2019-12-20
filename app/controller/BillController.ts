@@ -11,7 +11,7 @@ export default class HomeController extends BaseController {
       billId: 'string'
     })
 
-    const result = this.service.bill.getter.getBill(+this.ctx.request.query.billId)
+    const result = await this.service.bill.getter.getBill(+this.ctx.request.query.billId)
     this.ctx.stdout(result)
   }
 
@@ -19,7 +19,7 @@ export default class HomeController extends BaseController {
    * 获取账单列表
    */
   public async getBillList() {
-    const result = this.service.bill.getter.getBillList()
+    const result = await this.service.bill.getter.getBillList()
     this.ctx.stdout(result)
   }
 
