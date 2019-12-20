@@ -1,9 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
-/*.iml
-/.idea/
-/.vscode/
-/node_modules/
+logs/
 npm-debug.log
+node_modules/
+coverage/
+.idea/
 run/
 logs/
 .DS_Store
