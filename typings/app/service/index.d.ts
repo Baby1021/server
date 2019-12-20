@@ -4,12 +4,14 @@
 import 'egg';
 import ExportTest from '../../../app/service/Test';
 import ExportBillGetter from '../../../app/service/bill/getter';
+import ExportBillSetter from '../../../app/service/bill/setter';
 
 declare module 'egg' {
   interface IService {
     test: ExportTest;
     bill: {
       getter: ExportBillGetter;
+      setter: ExportBillSetter;
     }
   }
 }
