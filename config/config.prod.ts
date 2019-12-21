@@ -13,9 +13,9 @@ export default () => {
     password: 'lai756925010',
     database: 'baby',
     synchronize: false,
-    entities: ['app/model/**/*{.ts,.js}'],
-    migrations: ['app/migration/**/*{.ts,.js}'],
-    subscribers: ['app/subscriber/**/*{.ts,.js}'],
+    entities: ['app/model/**/*.js'],
+    migrations: ['app/migration/**/*.js'],
+    subscribers: ['app/subscriber/**/*.js'],
   }
 
   return config;
