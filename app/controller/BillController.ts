@@ -1,4 +1,6 @@
 import BaseController from "../base/BaseController";
+import { billTypeArray } from "../model/BillModel"
+import * as _ from 'lodash';
 
 export default class HomeController extends BaseController {
 
@@ -28,6 +30,11 @@ export default class HomeController extends BaseController {
    */
   public async saveBill() {
     const body = this.ctx.request.body
+
+    const type = this.ctx.request.body.type
+    if (type && !_.includes(billTypeArray, type)) {
+      throw Error(`账单类型错误，type：${type}`)
+    }
 
     const result = body.billId ?
       await this.service.bill.setter.updateBill(body) :

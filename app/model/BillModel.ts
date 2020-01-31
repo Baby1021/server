@@ -14,7 +14,7 @@ export default class BillModel extends BaseEntity {
 
   // 收入或支出
   @Column({ default: 'spending' })
-  type: string  // income、spending
+  type: BillType
 
   // 收入或支出
   @Column({ default: false })
@@ -26,3 +26,6 @@ export default class BillModel extends BaseEntity {
   @UpdateDateColumn()
   updated: Date
 }
+
+export const billTypeArray = ['income', 'spending']
+type BillType = 'income' | 'spending'
