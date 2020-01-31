@@ -10,6 +10,6 @@ export default class Test extends BaseService {
   }
 
   public async getBillList() {
-    return this.billRepo.find()
+    return this.billRepo.find({ deleted: false })
   }
 }
