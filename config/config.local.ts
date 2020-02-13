@@ -13,7 +13,7 @@ export default () => {
     password: process.env.MYSQL_PASSWORD || '123456',
     database: 'baby',
     synchronize: true,
-    logging: ['query'],
+    logging: true,
     entities: ['app/model/**/*{.ts,.js}'],
     migrations: ['app/migration/**/*{.ts,.js}'],
     subscribers: ['app/subscriber/**/*{.ts,.js}'],

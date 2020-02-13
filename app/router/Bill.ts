@@ -5,7 +5,7 @@ export default (app: Application) => {
 
   router.get('/bill', controller.billController.getBill);
   router.get('/bill/list', controller.billController.getBillList);
-  router.get(`/bill/typeList`, controller.billController.getBillTypeList)
+  router.get(`/bill/categories`, controller.billController.getBillCategoryList)
 
   router.post('/bill', controller.billController.saveBill);
 

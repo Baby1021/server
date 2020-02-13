@@ -58,8 +58,8 @@ export default class HomeController extends BaseController {
     this.ctx.stdout(result)
   }
 
-  public async getBillTypeList(){
-    const result = await this.service.bill.billTypeGetter.getBillTypeList()
+  public async getBillCategoryList(){
+    const result = await this.service.bill.billCategoryGetter.getBillCategoryList()
 
     this.ctx.stdout(result)
   }

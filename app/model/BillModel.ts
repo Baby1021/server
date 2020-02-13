@@ -1,4 +1,13 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity, JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm'
+import BillCategoryModel from "./BillCategoryModel"
 
 // 账单
 @Entity({ name: 'bill' })
@@ -15,6 +24,10 @@ export default class BillModel extends BaseEntity {
   // 收入或支出
   @Column({ default: 'spending' })
   type: BillType
+
+  @ManyToOne(() => BillCategoryModel)
+  @JoinColumn({ name: "categoryId" })
+  category: BillCategoryModel
 
   // 收入或支出
   @Column({ default: false })

@@ -1,8 +1,8 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 // 账单类型
-@Entity({ name: 'bill_type' })
-export default class BillTypeModel extends BaseEntity {
+@Entity({ name: 'bill_category' })
+export default class BillCategoryModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 

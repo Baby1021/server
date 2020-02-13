@@ -1,17 +1,17 @@
 import { Service } from 'egg';
 import { Repository } from "typeorm";
 import BillModel from "../model/BillModel";
-import BillTypeModel from "../model/BillTypeModel"
+import BillCategoryModel from "../model/BillCategoryModel"
 
 export default class BaseService extends Service {
 
   billRepo: Repository<BillModel>
-  billTypeRepo: Repository<BillTypeModel>
+  billCategoryRepo: Repository<BillCategoryModel>
 
   constructor(ctx) {
     super(ctx)
     this.billRepo = ctx.app.typeorm.getRepository(BillModel)
-    this.billTypeRepo = ctx.app.typeorm.getRepository(BillTypeModel)
+    this.billCategoryRepo = ctx.app.typeorm.getRepository(BillCategoryModel)
   }
 
   async getBillById(id) {
