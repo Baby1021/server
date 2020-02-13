@@ -46,14 +46,20 @@ export default class HomeController extends BaseController {
   /**
    * 删除一条账单
    */
-  public deleteBill() {
+  public async deleteBill() {
     const body = this.ctx.request.body
 
     this.validate(body, {
       billId: 'number'
     })
 
-    const result = this.service.bill.setter.deleteBill(+body.billId)
+    const result = await this.service.bill.setter.deleteBill(+body.billId)
+
+    this.ctx.stdout(result)
+  }
+
+  public async getBillCategoryList(){
+    const result = await this.service.bill.billCategoryGetter.getBillCategoryList()
 
     this.ctx.stdout(result)
   }

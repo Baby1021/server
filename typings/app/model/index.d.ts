@@ -2,10 +2,12 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
+import ExportBillCategoryModel from '../../../app/model/BillCategoryModel';
 import ExportBillModel from '../../../app/model/BillModel';
 
 declare module 'egg' {
   interface IModel {
+    BillCategoryModel: ReturnType<typeof ExportBillCategoryModel>;
     BillModel: ReturnType<typeof ExportBillModel>;
   }
 }

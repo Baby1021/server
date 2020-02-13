@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportTest from '../../../app/service/Test';
+import ExportBillBillCategoryGetter from '../../../app/service/bill/BillCategoryGetter';
 import ExportBillGetter from '../../../app/service/bill/getter';
 import ExportBillSetter from '../../../app/service/bill/setter';
 
@@ -10,6 +11,7 @@ declare module 'egg' {
   interface IService {
     test: ExportTest;
     bill: {
+      billCategoryGetter: ExportBillBillCategoryGetter;
       getter: ExportBillGetter;
       setter: ExportBillSetter;
     }
