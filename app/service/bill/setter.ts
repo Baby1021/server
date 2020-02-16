@@ -6,7 +6,15 @@ import BaseService from "../../base/BaseService";
 export default class BillSetterService extends BaseService {
 
   public async addBill(params: any) {
-    return await this.billRepo.save(params)
+    const { categoryId = -1 } = params
+
+    const category = await this.billCategoryRepo.findOne(categoryId)
+
+    if (!category) {
+      throw Error(`账单类型不存在，id=${categoryId}`)
+    }
+
+    return await this.billRepo.save({ ...params, category })
   }
 
   public async updateBill(params: any) {
