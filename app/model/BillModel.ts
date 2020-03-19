@@ -18,7 +18,7 @@ export default class BillModel extends BaseEntity {
   @Column()
   content: string
 
-  @Column({ default: 0 })
+  @Column({ default: 0, type: "float" })
   money: number
 
   // 收入或支出
