@@ -24,6 +24,12 @@ export default (appInfo: EggAppInfo) => {
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
+    umeng: {
+      appKey: "5c5b0ca1b465f5e9d900076d",
+      messageSecret: "45c70be2fea946a61cac41d3870714de",
+      masterSecret: "kflmfumfeeatuinmlb9hzrnsgr88dt76",
+      baseUrl: "https://msgapi.umeng.com/api/send"
+    }
   };
 
   // the return config will combines to EggAppConfig
