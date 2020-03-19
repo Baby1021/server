@@ -29,6 +29,9 @@ export default (appInfo: EggAppInfo) => {
       messageSecret: "45c70be2fea946a61cac41d3870714de",
       masterSecret: "kflmfumfeeatuinmlb9hzrnsgr88dt76",
       baseUrl: "https://msgapi.umeng.com/api/send"
+    },
+    alimap: {
+      key: 'b7b526e40df19650c4618760a34ee7a0'
     }
   };
 
