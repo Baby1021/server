@@ -1,7 +1,22 @@
 import BaseService from "../base/BaseService"
 import axios from 'axios'
+import AddressModel from "../model/AddressModel"
 
 export default class PushService extends BaseService {
+
+  /**
+   * 当地址更新后，通知伴侣
+   */
+  async pushLoverWhenAddressIsUpdate(address: AddressModel) {
+    const lover = await this.service.user.getLoverById(address.userId)
+    if (!lover || !lover.pushToken) {
+      return
+    }
+    return this.pushNotificationForUser(
+      `你的宝贝更新${address.type.name}啦，快去看看吧`, address.detail, lover.pushToken
+    )
+  }
+
 
   async pushNotificationForUser(title, desc, devicesToken) {
 

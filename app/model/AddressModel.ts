@@ -2,11 +2,11 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity, JoinColumn,
-  JoinTable,
-  ManyToMany,
+  Entity,
+  JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm"
 import UserModel from "./UserModel"
 import AddressTypeModel from "./AddressTypeModel"
@@ -38,25 +38,27 @@ export default class AddressModel extends BaseEntity {
   @Column()
   userId: number
 
+  @Column()
+  typeId: string
+
   // 地址类型
-  @ManyToMany(type => AddressTypeModel)
-  @JoinTable({
-    name: 'relation_address_and_addresstype',
-    joinColumn: {
-      name: "addressId",
-      referencedColumnName: "id"
-    },
-    inverseJoinColumn: {
-      name: "typeId",
-      referencedColumnName: "id"
-    }
-  })
+  @ManyToOne(type => AddressTypeModel)
+  @JoinColumn({ name: 'typeId' })
   type: AddressTypeModel
 
   @ManyToOne(type => UserModel, user => user.addresses)
   @JoinColumn({ name: 'userId' })
   user: UserModel
 
+  @Column()
+  addressId: string
+
+  @Column({ type: 'json' })
+  address: any
+
   @CreateDateColumn()
   created: Date
+
+  @UpdateDateColumn()
+  updated: Date
 }

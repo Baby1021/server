@@ -1,14 +1,4 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryColumn,
-  PrimaryGeneratedColumn
-} from "typeorm"
-import UserModel from "./UserModel"
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm"
 
 /**
  * 地址类型
@@ -21,7 +11,7 @@ export default class AddressTypeModel extends BaseEntity {
   @Column()
   name: string
 
-  @Column()
+  @Column({ nullable: true })
   icon: string
 
   @CreateDateColumn()

@@ -10,6 +10,22 @@ export default class LocationController extends BaseController {
     this.ctx.stdout(result)
   }
 
+  public async saveUserLocation() {
+    const userId = this.ctx.request.query.userId
+    const { addressId, typeId } = this.ctx.request.body
+
+    const params = { addressId, typeId, userId }
+
+    this.validate(params, {
+      addressId: 'string',
+      typeId: 'string',
+      userId: 'string'
+    })
+
+    const result = await this.service.location.setter.saveUserAddress(params)
+    this.ctx.stdout(result)
+  }
+
   public async searchLocation() {
 
     const request = this.ctx.request
