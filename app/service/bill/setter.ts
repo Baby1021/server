@@ -52,7 +52,7 @@ export default class BillSetterService extends BaseService {
   }
 
   public async deleteBill(billId: any) {
-    const bill = await this.getBillById(billId)
+    const bill = await this.service.bill.getter.getBill(billId)
     bill.deleted = true
     await bill.save()
   }

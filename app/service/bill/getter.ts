@@ -6,7 +6,11 @@ import BaseService from "../../base/BaseService";
 export default class BillGetter extends BaseService {
 
   public async getBill(billId: number) {
-    return this.getBillById(billId)
+    try {
+      return this.billRepo.findOneOrFail(billId)
+    } catch (e) {
+      throw Error(`不存在账单数据，账单Id:${billId}`)
+    }
   }
 
   public async getBillList() {
