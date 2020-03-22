@@ -1,5 +1,9 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import UserModel from "./UserModel"
 
+/**
+ * 每次启动的定位
+ */
 @Entity('user_location')
 export default class UserLocation extends BaseEntity {
 
@@ -8,6 +12,10 @@ export default class UserLocation extends BaseEntity {
 
   @Column()
   userId: string;
+
+  @ManyToOne(type => UserModel)
+  @JoinColumn({ name: 'userId' })
+  user: UserModel;
 
   @Column()
   accuracy: number;
@@ -52,13 +60,13 @@ export default class UserLocation extends BaseEntity {
   gpsAccuracyStatus: number;
 
   @Column()
-  latitude: number;
+  latitude: string;
 
   @Column()
   locationDetail: string;
 
   @Column()
-  longitude: number;
+  longitude: string;
 
   @Column()
   poiName: string;
