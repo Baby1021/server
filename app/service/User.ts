@@ -16,6 +16,11 @@ export default class UserService extends BaseService {
     const user = await this.userRepo.findOne({ relations: ['lover'], where: { userId } })
     return user?.lover
   }
+
+  async savePushToken(params: any) {
+    const user = await this.userRepo.update({ userId: params.userId }, { pushToken: params.pushToken })
+    return user
+  }
 }
 
 

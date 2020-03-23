@@ -6,4 +6,9 @@ export default class HomeController extends Controller {
     const result  = this.ctx.request.body
     this.ctx.stdout(result)
   }
+
+  public async pushToken(){
+    const result = await this.service.user.savePushToken(this.ctx.request.body)
+    this.ctx.stdout(result)
+  }
 }
