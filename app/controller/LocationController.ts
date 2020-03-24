@@ -6,7 +6,7 @@ export default class LocationController extends BaseController {
 
   public async reportLocation() {
     const body = this.ctx.request.body
-    const result = await this.service.location.setter.saveLocation(body)
+    const result = await this.service.location.saveLocation(body)
     this.ctx.stdout(result)
   }
 
@@ -22,7 +22,7 @@ export default class LocationController extends BaseController {
       userId: 'string'
     })
 
-    const result = await this.service.location.setter.saveUserAddress(params)
+    const result = await this.service.location.saveUserAddress(params)
     this.ctx.stdout(result)
   }
 
