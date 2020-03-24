@@ -22,6 +22,7 @@ export default class LocationSetter extends BaseService {
     let fences = _.filter(checkResult.data.fencing_event_list, { client_status: 'in' })
     if (_.isEmpty(fences)) {
       this.logger.info(`上报的定位没有命中围栏`)
+      return
     }
 
     const address = await this.addressRepo.findOne({
