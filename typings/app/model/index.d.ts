@@ -6,7 +6,7 @@ import ExportAddressModel from '../../../app/model/AddressModel';
 import ExportAddressTypeModel from '../../../app/model/AddressTypeModel';
 import ExportBillCategoryModel from '../../../app/model/BillCategoryModel';
 import ExportBillModel from '../../../app/model/BillModel';
-import ExportUserLocation from '../../../app/model/UserLocation';
+import ExportUserLocationModel from '../../../app/model/UserLocationModel';
 import ExportUserModel from '../../../app/model/UserModel';
 
 declare module 'egg' {
@@ -15,7 +15,7 @@ declare module 'egg' {
     AddressTypeModel: ReturnType<typeof ExportAddressTypeModel>;
     BillCategoryModel: ReturnType<typeof ExportBillCategoryModel>;
     BillModel: ReturnType<typeof ExportBillModel>;
-    UserLocation: ReturnType<typeof ExportUserLocation>;
+    UserLocationModel: ReturnType<typeof ExportUserLocationModel>;
     UserModel: ReturnType<typeof ExportUserModel>;
   }
 }
