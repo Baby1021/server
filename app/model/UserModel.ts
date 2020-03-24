@@ -36,6 +36,13 @@ export default class UserModel extends BaseEntity {
   addresses: AddressModel[]
 
   @Column({ nullable: true })
+  currentAddressId: number
+
+  @OneToOne(type => AddressModel)
+  @JoinColumn({ name: 'currentAddressId' })
+  address: AddressModel
+
+  @Column({ nullable: true })
   pushToken: string
 
   @Column({ nullable: true })

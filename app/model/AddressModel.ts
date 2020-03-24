@@ -50,11 +50,17 @@ export default class AddressModel extends BaseEntity {
   @JoinColumn({ name: 'userId' })
   user: UserModel
 
+  // 高德地图poiId
   @Column()
   addressId: string
 
+  // 高德地图 原始数据
   @Column({ type: 'json' })
   address: any
+
+  // 高德地图围栏Id
+  @Column({ nullable: true })
+  fenceId: string
 
   @CreateDateColumn()
   created: Date

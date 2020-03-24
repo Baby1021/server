@@ -5,7 +5,20 @@ import AddressModel from "../model/AddressModel"
 export default class PushService extends BaseService {
 
   /**
-   * 当地址更新后，通知伴侣
+   * 实时地址更新后，推送给小宝贝
+   */
+  async pushLoverWhereYouAre(address: AddressModel) {
+    const lover = await this.service.user.getLoverById(address.userId)
+    if (!lover || !lover.pushToken) {
+      return
+    }
+    return this.pushNotificationForUser(
+      `你的宝贝实时位置更新啦，他现在在${address.name}`, address.detail, lover.pushToken
+    )
+  }
+
+  /**
+   * 当地址更新后，通知小宝贝
    */
   async pushLoverWhenAddressIsUpdate(address: AddressModel) {
     const lover = await this.service.user.getLoverById(address.userId)
