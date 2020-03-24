@@ -13,7 +13,7 @@ export default class PushService extends BaseService {
       return
     }
     return this.pushNotificationForUser(
-      `你的宝贝实时位置更新啦，他现在在${address.name}`, address.detail, lover.pushToken
+      `你的宝贝现在位于${address.name}`, address.detail, lover.pushToken
     )
   }
 
@@ -32,6 +32,8 @@ export default class PushService extends BaseService {
 
 
   async pushNotificationForUser(title, desc, devicesToken) {
+
+    this.logger.info(`消息推送，title:${title},desc:${desc},token:${devicesToken}`)
 
     const params = {
       'appkey': this.config.umeng.appKey,
