@@ -1,13 +1,20 @@
-import BaseService from "../../base/BaseService";
-import AddressModel from "../../model/AddressModel"
-import UserLocationModel from "../../model/UserLocationModel"
+import BaseService from "../base/BaseService";
+import AddressModel from "../model/AddressModel"
+import UserLocationModel from "../model/UserLocationModel"
 import * as _ from 'lodash';
 import { In } from "typeorm"
 
 /**
  * 定位信息
  */
-export default class LocationSetter extends BaseService {
+export default class LocationService extends BaseService {
+
+  public async getUserLatestLocation(userId) {
+    return this.userLocationRepo.findOne({
+      where: { userId },
+      order: { created: 'DESC' },
+    })
+  }
 
   public async saveLocation(params: any) {
     const location = await this.userLocationRepo.save(params)
