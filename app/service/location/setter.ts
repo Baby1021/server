@@ -41,6 +41,7 @@ export default class LocationSetter extends BaseService {
 
     // 相同地址
     if (user.currentAddressId === address.id) {
+      this.logger.info(`用户在同一地址`)
       return
     }
 
@@ -77,6 +78,7 @@ export default class LocationSetter extends BaseService {
     let userAddress
     let oldAddressId
     if (existAddress) {
+      this.logger.info(`更新地址`)
       oldAddressId = existAddress.addressId
       existAddress.name = address.name
       existAddress.detail = address.pname + address.cityname + address.adname + address.business_area + address.address
@@ -88,6 +90,7 @@ export default class LocationSetter extends BaseService {
       await existAddress.save()
       userAddress = existAddress
     } else {
+      this.logger.info(`新建地址`)
       userAddress = await this.addressRepo.save({
         name: address.name,
         detail: address.pname + address.cityname + address.adname + address.business_area + address.address,
@@ -111,8 +114,14 @@ export default class LocationSetter extends BaseService {
 
   private async createAddressFence(address: AddressModel) {
     const user = await this.service.user.getUserById(address.userId)
-    const fenceResult = await this.app.alimap.createGeoFence(`${user.name}的${address.type.name}`, address.longitude, address.latitude)
-    await this.addressRepo.update({ id: address.id }, { fenceId: fenceResult.data.gid })
+    if (address.fenceId) {
+      await this.app.alimap.updateGeoFence(address.fenceId, `${user.name}的${address.type.name}`, address.longitude, address.latitude)
+      this.logger.info(`更新地址的围栏成功`)
+    } else {
+      const fenceResult = await this.app.alimap.createGeoFence(`${user.name}的${address.type.name}`, address.longitude, address.latitude)
+      await this.addressRepo.update({ id: address.id }, { fenceId: fenceResult.data.gid })
+      this.logger.info(`创建围栏成功`)
+    }
   }
 
 }

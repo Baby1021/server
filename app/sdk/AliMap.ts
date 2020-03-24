@@ -22,8 +22,21 @@ export default class AliMap {
     })
   }
 
+  async updateGeoFence(gid, name, lng, lat, radius = 500) {
+    const result = await this.request.patch(`https://restapi.amap.com/v4/geofence/meta`, {
+      name,
+      center: `${lng},${lat}`,
+      desc: `${name},半径${radius}`,
+      radius: radius,
+    }, { params: { gid } })
+
+    this.app.logger.info(`更新围栏成功，${gid},${name},${lng},${lat}`)
+
+    return result
+  }
+
   async createGeoFence(name, lng, lat, radius = 500): Promise<CreateGeoFenceResponse> {
-    return this.request.post('/v4/geofence/meta', {
+    const result: CreateGeoFenceResponse = await this.request.post('/v4/geofence/meta', {
       name,
       center: `${lng},${lat}`,
       desc: `${name},半径${radius}`,
@@ -35,6 +48,12 @@ export default class AliMap {
       time: "00:00,23:59",
       alert_condition: "enter;leave"
     })
+
+    if (result.data.status !== '0') {
+      throw Error(`创建围栏失败，${JSON.stringify(result)}`)
+    }
+
+    return result
   }
 
   async getLocation(id): Promise<any> {

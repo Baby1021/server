@@ -44,7 +44,8 @@ export default class LocationController extends BaseController {
       }
     })
 
-    this.ctx.stdout(_.get(result, 'data.tips', []))
+    let data = _.get(result, 'data.tips', [])
+    this.ctx.stdout(_.map(data, item => _.isArray(item.address) ? { ...item, address: '' } : item))
   }
 
 }
