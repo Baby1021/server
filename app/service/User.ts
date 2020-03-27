@@ -14,7 +14,7 @@ export default class UserService extends BaseService {
 
   async getLoverById(userId) {
     const user = await this.userRepo.findOne({ relations: ['lover'], where: { userId } })
-    return user?.lover
+    return user ? user.lover : undefined
   }
 
   async savePushToken(params: any) {
