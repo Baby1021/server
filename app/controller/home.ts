@@ -14,7 +14,7 @@ export default class HomeController extends BaseController {
   public async homeInfo() {
     const user = await this.service.user.getUserById(this.getUserId())
     const lover = await this.service.user.getLoverById(this.getUserId())
-    const location = await this.service.location.getUserLatestLocation(this.getUserId())
+    const location = await this.service.location.getUserLatestLocation(lover && lover.userId)
 
     this.ctx.stdout({
       user: {
