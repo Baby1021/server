@@ -24,7 +24,7 @@ export default class HomeController extends BaseController {
       lover: lover ? {
         name: lover.name,
         avatar: lover.avatar,
-        addressName: location?.aoiName
+        addressName: location && location.aoiName
       } : null
     })
   }
