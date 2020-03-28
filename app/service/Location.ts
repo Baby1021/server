@@ -18,7 +18,12 @@ export default class LocationService extends BaseService {
 
   public async saveLocation(params: any) {
     const location = await this.userLocationRepo.save(params)
-    this.isInFence(location)
+    const address = await this.isInFence(location)
+    if (address) {
+      await this.userRepo.update({ userId: location.userId }, { currentAddressId: address.id })
+    } else {
+      await this.userRepo.update({ userId: location.userId }, { currentAddressId: -1 })
+    }
     return '保存定位成功'
   }
 
@@ -54,8 +59,8 @@ export default class LocationService extends BaseService {
 
     await this.service.push.pushLoverWhereYouAre(address)
     // 更新用户的实时位置
-    await this.userRepo.update({ userId: user.userId }, { currentAddressId: address.id })
     this.logger.info(`已更新${user.userId}的实时地址为${address.id},${address.name}`)
+    return address
   }
 
   public async getUserAddressByType(userId, typeId) {
