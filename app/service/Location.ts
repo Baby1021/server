@@ -22,7 +22,7 @@ export default class LocationService extends BaseService {
     if (address) {
       await this.userRepo.update({ userId: location.userId }, { currentAddressId: address.id })
     } else {
-      await this.userRepo.update({ userId: location.userId }, { currentAddressId: -1 })
+      await this.userRepo.update({ userId: location.userId }, { currentAddressId: undefined })
     }
     return '保存定位成功'
   }
