@@ -8,6 +8,10 @@ const plugin: EggPlugin = {
   validate: {
     enable: true,
     package: 'egg-validate',
+  },
+  oss: {
+    enable: true,
+    package: 'egg-oss',
   }
 };
 

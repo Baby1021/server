@@ -4,6 +4,7 @@
 import 'egg';
 import ExportAddress from '../../../app/service/Address';
 import ExportLocation from '../../../app/service/Location';
+import ExportLove from '../../../app/service/Love';
 import ExportPush from '../../../app/service/Push';
 import ExportTest from '../../../app/service/Test';
 import ExportUser from '../../../app/service/User';
@@ -15,6 +16,7 @@ declare module 'egg' {
   interface IService {
     address: ExportAddress;
     location: ExportLocation;
+    love: ExportLove;
     push: ExportPush;
     test: ExportTest;
     user: ExportUser;

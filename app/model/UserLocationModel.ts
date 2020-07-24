@@ -4,7 +4,7 @@ import UserModel from "./UserModel"
 /**
  * 每次启动的定位
  */
-@Entity('user_location')
+@Entity('baby_user_location')
 export default class UserLocationModel extends BaseEntity {
 
   @PrimaryGeneratedColumn()

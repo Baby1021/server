@@ -1,0 +1,5 @@
+export const METADATA_HTTP_METHOD = 'http_method'
+export const METADATA_HTTP_PATH = 'http_path'
+export const METADATA_HTTP_PARAMS = 'http_params'
+export const METADATA_RETURN_BODY = 'returnBody'
+export const METADATA_SKIP_SSO = 'skip_SSO'
