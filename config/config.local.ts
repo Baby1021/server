@@ -5,7 +5,6 @@ export default () => {
 
   config.typeorm = {
     type: 'mysql',
-    entityPrefix: 'baby_',
     charset: 'utf8mb4',
     host: '127.0.0.1',
     port: '3306',

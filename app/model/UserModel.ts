@@ -13,7 +13,7 @@ import AddressModel from "./AddressModel"
 /**
  * 每次启动的定位
  */
-@Entity('user')
+@Entity('baby_user')
 export default class UserModel extends BaseEntity {
 
   @PrimaryColumn()

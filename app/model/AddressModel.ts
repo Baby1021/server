@@ -14,7 +14,7 @@ import AddressTypeModel from "./AddressTypeModel"
 /**
  * 地址
  */
-@Entity('address')
+@Entity('baby_address')
 export default class AddressModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number

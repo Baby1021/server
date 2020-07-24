@@ -10,7 +10,7 @@ import {
 import BillCategoryModel from "./BillCategoryModel"
 
 // 账单
-@Entity({ name: 'bill' })
+@Entity({ name: 'baby_bill' })
 export default class BillModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
@@ -18,7 +18,7 @@ export default class BillModel extends BaseEntity {
   @Column()
   content: string
 
-  @Column({ default: 0, type: "float" })
+  @Column({ type: "float" })
   money: number
 
   // 收入或支出
