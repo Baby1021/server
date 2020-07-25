@@ -31,7 +31,6 @@ export default class LoveController extends Controller {
    * @param page
    * @param limit
    */
-  @ReturnBody
   @GET('/api/v1/love/list')
   public async loveList(
     @Query('userId') userId: string,
