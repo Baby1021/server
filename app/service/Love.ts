@@ -6,6 +6,15 @@ import LoveModel from "../model/LoveModel";
  */
 export default class LoveService extends Service {
 
+  public async getLoves(userId: string, page: number, limit: number) {
+    return LoveModel.find({
+      where: { userId },
+      skip: (page - 1) * limit,
+      take: limit,
+      order: { created: "DESC" }
+    })
+  }
+
   /**
    * 发布一条Love动态
    */
