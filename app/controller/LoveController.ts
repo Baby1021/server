@@ -1,5 +1,9 @@
 import { Controller } from 'egg';
 import { Body, GET, POST, Query, ReturnBody } from "../../lib/router";
+import { RuleType } from "../const/RuleType";
+import * as _ from 'lodash'
+import { LoveListResponse, UserResponse } from "../const/type";
+import { getYMDHM } from "../../lib/util";
 
 export default class LoveController extends Controller {
 
@@ -31,12 +35,35 @@ export default class LoveController extends Controller {
    * @param page
    * @param limit
    */
-  @GET('/api/v1/love')
+  @ReturnBody
+  @GET('/api/v1/love/list')
   public async loveList(
-    @Query('userId') userId: string,
-    @Query('page') page: string,
-    @Query('limit') limit: string
-  ) {
-    this.ctx.body = await this.service.love.getLoves(userId, +page, +limit)
+    @Query('userId', RuleType.String) userId: string,
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '10'
+  ): Promise<LoveListResponse[]> {
+    const { user, lover } = await this.service.user.getUserAndLover(userId)
+
+    const loves = await this.service.love.getLoves([user.userId, lover?.userId], +page, +limit)
+    const comments = await this.service.love.getLoveComments(_.map(loves, 'id'))
+
+    const getUser = (userId) => {
+      const u = user.userId === userId ? user : lover
+      return _.pick(u, ['userId', 'name', 'avatar', 'loveId']) as UserResponse
+    }
+
+    return _.map(loves, love => ({
+      ..._.pick(love, ['id', 'content', 'images', 'remind']),
+      created: getYMDHM(love.created),
+      user: getUser(love.userId),
+      comments: _.chain(comments)
+        .filter(comment => comment.loveId === love.id)
+        .map(comment => ({
+          content: comment.content,
+          created: getYMDHM(comment.created),
+          user: getUser(comment.userId)
+        }))
+        .value()
+    }))
   }
 }
