@@ -31,7 +31,7 @@ export default class LoveController extends Controller {
    * @param page
    * @param limit
    */
-  @GET('/api/v1/love/list')
+  @GET('/api/v1/love')
   public async loveList(
     @Query('userId') userId: string,
     @Query('page') page: string,
