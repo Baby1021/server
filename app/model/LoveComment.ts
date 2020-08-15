@@ -2,19 +2,20 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity, JoinColumn,
-  ManyToOne, OneToMany,
+  Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
 import UserModel from "./UserModel";
-import LoveComment from "./LoveComment";
+import LoveModel from "./LoveModel";
 
 /**
  * 动态
  */
-@Entity({ name: 'love' })
-export default class LoveModel extends BaseEntity {
+@Entity({ name: 'love_comment' })
+export default class LoveComment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -28,14 +29,12 @@ export default class LoveModel extends BaseEntity {
   @JoinColumn({ name: 'userId' })
   user: UserModel
 
-  @OneToMany(type => LoveComment, comment => comment.love)
-  comments: LoveComment[]
+  @Column()
+  loveId: number
 
-  @Column({ type: 'json', nullable: true })
-  images: string[]
-
-  @Column({ default: false })
-  remind: boolean
+  @ManyToOne(type => LoveModel)
+  @JoinColumn({ name: 'loveId' })
+  love: LoveModel
 
   @Column({ default: false })
   deleted: boolean

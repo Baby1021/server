@@ -1,6 +1,24 @@
 import BaseService from "../base/BaseService"
+import UserModel from "../model/UserModel";
 
 export default class UserService extends BaseService {
+
+  async getUserAndLover(userId: string): Promise<{ user: UserModel, lover: UserModel }> {
+    const user = await UserModel.findOne({
+      where: { userId },
+      relations: ['lover']
+    })
+
+    if (!user) {
+      this.logger.error(`用户不存在`, userId)
+      throw Error(`用户不存在`)
+    }
+
+    return {
+      user: user,
+      lover: user.lover
+    }
+  }
 
   async getUserById(userId) {
     const user = await this.userRepo.findOne(userId)
