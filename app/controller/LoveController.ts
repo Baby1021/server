@@ -3,7 +3,7 @@ import { Body, GET, POST, Query, ReturnBody } from "../../lib/router";
 import { RuleType } from "../const/RuleType";
 import * as _ from 'lodash'
 import { LoveListResponse, UserResponse } from "../const/type";
-import { getYMDHM } from "../../lib/util";
+import { DateUtils } from "../../lib/util/DateUtils";
 
 export default class LoveController extends Controller {
 
@@ -54,13 +54,13 @@ export default class LoveController extends Controller {
 
     return _.map(loves, love => ({
       ..._.pick(love, ['id', 'content', 'images', 'remind']),
-      created: getYMDHM(love.created),
+      created: DateUtils.getYMDHM(love.created),
       user: getUser(love.userId),
       comments: _.chain(comments)
         .filter(comment => comment.loveId === love.id)
         .map(comment => ({
           content: comment.content,
-          created: getYMDHM(comment.created),
+          created: DateUtils.getYMDHM(comment.created),
           user: getUser(comment.userId)
         }))
         .value()
