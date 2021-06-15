@@ -3,7 +3,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn, JoinTable, ManyToMany, OneToMany,
+  JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
   UpdateDateColumn
