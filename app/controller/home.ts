@@ -1,4 +1,5 @@
 import BaseController from '../base/BaseController'
+import { PUT, ReturnBody } from "../../lib/router";
 
 const fs = require('mz/fs')
 const path = require('path')
@@ -9,9 +10,10 @@ export default class HomeController extends BaseController {
     this.ctx.stdout(result)
   }
 
+  @PUT('/api/v1/user/pushToken')
+  @ReturnBody
   public async pushToken () {
-    const result = await this.service.user.savePushToken(this.ctx.request.body)
-    this.ctx.stdout(result)
+    return this.service.user.savePushToken(this.ctx.request.body)
   }
 
   public async getSignImage(){
