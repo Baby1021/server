@@ -24,9 +24,6 @@ export default class HomeController extends BaseController {
   public async uploadImage () {
     const { ctx, app } = this
 
-    // const file = ctx.request.files[0]
-    // const name = 'egg-oss-demo/' + path.basename(file.filename)
-    // let result
     try {
       // result = await app.oss.get('image').put(name, file.filepath)
 
