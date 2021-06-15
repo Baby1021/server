@@ -1,9 +1,6 @@
 import BaseController from '../base/BaseController'
 import { PUT, ReturnBody } from "../../lib/router";
 
-const fs = require('mz/fs')
-const path = require('path')
-
 export default class HomeController extends BaseController {
   public async index () {
     const result = this.ctx.request.body
