@@ -14,7 +14,7 @@ export default () => {
     const end = process.hrtime(start)
     const cost = Math.round(end[0] * 1000 + end[1] / 1000000)
 
-    ctx.logger.info(`Time: ${cost} ms -----\n`)
-    ctx.logger.info(`response：${JSON.stringify(ctx.response.body)}`)
+    // ctx.logger.info(`Time: ${cost} ms -----\n`)
+    // ctx.logger.info(`response：${JSON.stringify(ctx.response.body)}`)
   }
 }
