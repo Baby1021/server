@@ -4,6 +4,7 @@ import { PUT, ReturnBody } from "../../lib/router";
 export default class HomeController extends BaseController {
   public async index() {
     const result = this.ctx.request.body
+    this.logger.info('home')
     this.ctx.stdout(result)
   }
 
@@ -14,8 +15,7 @@ export default class HomeController extends BaseController {
   }
 
   public async getSignImage() {
-    const url = this.app.oss.get('image').signatureUrl('b79689cd75cf5d3-200x180.jpg', { 'process': 'image/resize,w_50' });
-    this.ctx.body = url
+    this.ctx.body = this.app.oss.get('image').signatureUrl('b79689cd75cf5d3-200x180.jpg', { 'process': 'image/resize,w_50' })
   }
 
   public async uploadImage() {
